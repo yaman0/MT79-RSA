@@ -7,6 +7,13 @@ def modpow(n, pow, mod):
         return (n * modpow(n, pow / 2, mod) * modpow(n, pow / 2, mod)) % mod
 
 
+def gcd(a, b):
+    if (b == 0):
+        return a
+    else:
+        return gcd(b, a % b)
+
+
 def euclideDiv(a, b):
     r = a % b
     q = (a - r) / b
@@ -24,3 +31,18 @@ def euclidExtend(a, b):
         a, u, v = b, u_, v_  # shift
         b, u_, v_ = r, _u - q * u_, _v - q * v_  # computed
     return a, u, v
+
+
+def inverseModulaire(a, n):
+    pgcd, u, v = euclidExtend(a, n)
+    if not pgcd == 1:
+        raise ValueError('PGCD != 1')
+    return u % n
+
+def generationExposant(p ,q):
+    c, d = 2, 0
+    phi = (p-1)*(q-1)
+    while not gcd(phi, c)==1 :
+        c+=1
+    d = inverseModulaire(c, phi)
+    return c, d
