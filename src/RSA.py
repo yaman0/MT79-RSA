@@ -1,3 +1,5 @@
+import math
+
 import Tools
 
 
@@ -10,7 +12,7 @@ def dechiffrement(m, n, c):
 
 
 def findPrivateKey(n, c):
-    divisors = [d for d in xrange(2, n / 2) if n % d == 0]
+    divisors = [d for d in xrange(2, int(math.sqrt(n))) if n % d == 0]
     p = divisors[0]
     q = n / p
     d = Tools.inverseModulaire(c, (p - 1) * (q - 1))

@@ -1,11 +1,15 @@
+import math
+
+
 def modpow(n, pow, mod):
     result = 1
     while pow > 0:
         if (pow & 1) > 0:
             result = (result * n) % mod
         pow >>= 1
-        n = (n**2) % mod
+        n = (n ** 2) % mod
     return result
+
 
 def gcd(a, b):
     if (b == 0):
@@ -47,3 +51,22 @@ def generationExposant(p, q):
         c += 1
     d = inverseModulaire(c, phi)
     return c, d
+
+
+def primeFactors(n):
+    result = []
+    while n % 2 == 0:
+        result.append(2)
+        n = n / 2
+
+    for i in range(3, int(math.sqrt(n)) + 1, 2):
+        # while i divides n , print i ad divide n
+        while n % i == 0:
+            result.append(i)
+            n = n / i
+
+            # Condition if n is a prime
+    # number greater than 2
+    if n > 2:
+        result.append(n)
+    return result
