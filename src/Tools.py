@@ -1,11 +1,11 @@
 def modpow(n, pow, mod):
-    if pow == 0:
-        return 1
-    elif pow % 2 == 0:
-        return (modpow(n, pow / 2, mod) * modpow(n, pow / 2, mod)) % mod
-    else:
-        return (n * modpow(n, pow / 2, mod) * modpow(n, pow / 2, mod)) % mod
-
+    result = 1
+    while pow > 0:
+        if (pow & 1) > 0:
+            result = (result * n) % mod
+        pow >>= 1
+        n = (n**2) % mod
+    return result
 
 def gcd(a, b):
     if (b == 0):
@@ -39,10 +39,11 @@ def inverseModulaire(a, n):
         raise ValueError('PGCD != 1')
     return u % n
 
-def generationExposant(p ,q):
+
+def generationExposant(p, q):
     c, d = 2, 0
-    phi = (p-1)*(q-1)
-    while not gcd(phi, c)==1 :
-        c+=1
+    phi = (p - 1) * (q - 1)
+    while not gcd(phi, c) == 1:
+        c += 1
     d = inverseModulaire(c, phi)
     return c, d
