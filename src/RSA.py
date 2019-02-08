@@ -1,12 +1,12 @@
 import Tools
 
 
-def chiffrement(m, n, c):
-    return Tools.modpow(m, c, n)
-
-
-def dechiffrement(m, n, d):
+def chiffrement(m, n, d):
     return Tools.modpow(m, d, n)
+
+
+def dechiffrement(m, n, c):
+    return Tools.modpow(m, c, n)
 
 
 def findPrivateKey(n, c):
