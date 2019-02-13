@@ -1,6 +1,6 @@
 import math
 
-import Tools
+import MathTools
 
 
 def chiffrement(m, n, d):
@@ -11,7 +11,7 @@ def chiffrement(m, n, d):
     :param int d: d from public key
     :return int : m encrypt
     """
-    return Tools.modpow(m, d, n)
+    return MathTools.modpow(m, d, n)
 
 
 def dechiffrement(m, n, c):
@@ -22,7 +22,7 @@ def dechiffrement(m, n, c):
     :param int c: c from private key
     :return int: decrypt
     """
-    return Tools.modpow(m, c, n)
+    return MathTools.modpow(m, c, n)
 
 
 def findPrivateKey(n, c):
@@ -36,5 +36,5 @@ def findPrivateKey(n, c):
     divisors = [d for d in xrange(2, int(math.sqrt(n))) if n % d == 0]
     p = divisors[0]
     q = n / p
-    d = Tools.inverseModulaire(c, (p - 1) * (q - 1))
+    d = MathTools.inverseModulaire(c, (p - 1) * (q - 1))
     return d

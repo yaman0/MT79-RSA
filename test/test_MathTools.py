@@ -1,6 +1,6 @@
 import pytest
 
-from src.Tools import *
+from src.MathTools import *
 
 def test_gcd_should_works():
     assert gcd(60, 48) == 12

@@ -1,6 +1,6 @@
 import math
 
-import Tools
+import MathTools
 
 # constants
 ALPHABET = '.ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -29,11 +29,11 @@ def intToString(number):
     """
     #init
     string = ""
-    q, r = Tools.euclideDiv(number, SIZE)
+    q, r = MathTools.euclideDiv(number, SIZE)
 
     while q % SIZE > 0:
         string = ALPHABET[r] + string
-        q, r = Tools.euclideDiv(q, SIZE)
+        q, r = MathTools.euclideDiv(q, SIZE)
 
     string = ALPHABET[r] + string
     return string
