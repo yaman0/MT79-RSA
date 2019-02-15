@@ -10,11 +10,9 @@ def crypt(args):
 
 
 def decrypt(args):
-    message = int(args.message)
-    # message = StringTool.stringToInt(args.message)
+    message = StringTool.stringToInt(args.message)
     message = RSA.dechiffrement(message, args.n, args.d)
-    # print StringTool.intToString(message)
-    print message
+    print StringTool.intToString(message)
 
 def cryptint(args):
     print(RSA.chiffrement(args.message, args.n, args.c))
@@ -48,7 +46,6 @@ if __name__ == '__main__':
     crypt_parse.add_argument("d", help="d from private key",
                              type=int)
     crypt_parse.set_defaults(func=crypt)
-    crypt_parse = subparser.add_parser('crypt', help='Crypt message')
 
     decode_parse = subparser.add_parser('decode', help='Crypt message')
     decode_parse.add_argument("message", help="message to decode",
