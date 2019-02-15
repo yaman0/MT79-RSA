@@ -10,10 +10,17 @@ def crypt(args):
 
 
 def decrypt(args):
-    message = StringTool.stringToInt(args.message)
+    message = int(args.message)
+    # message = StringTool.stringToInt(args.message)
     message = RSA.dechiffrement(message, args.n, args.d)
-    print StringTool.intToString(message)
+    # print StringTool.intToString(message)
+    print message
 
+def cryptint(args):
+    print(RSA.chiffrement(args.message, args.n, args.c))
+
+def decryptint(args):
+    print(RSA.dechiffrement(args.message, args.n, args.d))
 
 def decode(args):
     message = StringTool.stringToInt(args.message)
@@ -55,9 +62,9 @@ if __name__ == '__main__':
     decrypt_parse = subparser.add_parser('decrypt', help='Crypt message')
     decrypt_parse.add_argument("message", help="message to decrypt",
                                type=str)
-    decrypt_parse.add_argument("n", help="n from public key",
+    decrypt_parse.add_argument("n", help="n from private key",
                                type=int)
-    decrypt_parse.add_argument("d", help="d from public key",
+    decrypt_parse.add_argument("d", help="d from private key",
                                type=int)
     decrypt_parse.set_defaults(func=decrypt)
 
@@ -70,6 +77,24 @@ if __name__ == '__main__':
     nts_parse.add_argument("number", help="Number to string",
                            type=int)
     nts_parse.set_defaults(func=numbertostring)
+
+    decryptint_parse = subparser.add_parser('decryptint', help='decrypt int')
+    decryptint_parse.add_argument("message", help="Number to decrypt",
+                           type=int)
+    decryptint_parse.add_argument("n", help="n from private key",
+                               type=int)
+    decryptint_parse.add_argument("d", help="d from private key",
+                           type=int)
+    decryptint_parse.set_defaults(func=decryptint)
+
+    cryptint_parse = subparser.add_parser('cryptint', help='crypt int')
+    cryptint_parse.add_argument("message", help="Number to decrypt",
+                                  type=int)
+    cryptint_parse.add_argument("n", help="n from public key",
+                                  type=int)
+    cryptint_parse.add_argument("c", help="c from public key",
+                                  type=int)
+    cryptint_parse.set_defaults(func=cryptint)
 
     args = parser.parse_args()
     args.func(args)
